@@ -1,12 +1,138 @@
 .button {
-  border: 2px solid rgb(var(--foreground-rgb));
-  font-size: 1.6rem;
+  --color: var(--color-foreground);
+  --bg: var(--color-foreground);
+  --border-width: 2px;
+  --corner-width: 0.8rem;
+  --corner-height: 0.6rem;
+  --corner-size: 0.6rem;
+  --triangle-side: 1rem;
+  --triangle-indent: 4px;
+
   font-family: 'NeueMachina', sans-serif;
-  padding: 2rem 2.5rem 1.5rem;
-  transition: all 0.3s ease-in-out;
+  font-size: 1.6rem;
+  width: 280px;
+  margin: 0 auto;
+  padding: 2rem 3rem 1.4rem;
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-content: center;
+  color: var(--color);
+  transition: color 0.2s linear 0.1s;
+
+  clip-path: polygon(
+    0 var(--corner-height),
+    calc(100% - (var(--corner-size) * 7)) var(--corner-height),
+    calc(100% - (var(--corner-size) * 7 - var(--corner-width))) 0,
+    100% 0,
+    100% 100%,
+    calc(var(--corner-size) * 5) 100%,
+    calc(var(--corner-size) * 5 - var(--corner-width))
+      calc(100% - var(--corner-height)),
+    0 calc(100% - var(--corner-height))
+  );
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    z-index: -2;
+
+    clip-path: polygon(
+      0 var(--corner-height),
+      calc(100% - (var(--corner-size) * 7)) calc(var(--corner-height)),
+      calc(100% - (var(--corner-size) * 7 - var(--corner-width))) 0,
+      100% 0,
+      100% 100%,
+      calc(var(--corner-size) * 5) 100%,
+      calc(var(--corner-size) * 5 - var(--corner-width))
+        calc(100% - var(--corner-height)),
+      0 calc(100% - var(--corner-height)),
+      0 calc(100% - (var(--corner-height) + var(--border-width))),
+      calc(var(--corner-size) * 3)
+        calc(100% - (var(--corner-height) + var(--border-width))),
+      calc(var(--corner-size) * 5 - var(--corner-width) + var(--border-width) / 2)
+        calc(100% - (var(--corner-height) + var(--border-width))),
+      calc(var(--corner-size) * 5 + var(--border-width) / 2)
+        calc(100% - var(--border-width)),
+      calc(100% - var(--border-width)) calc(100% - var(--border-width)),
+      calc(100% - var(--border-width)) var(--border-width),
+      calc(
+          100% -
+            (var(--corner-size) * 7 - var(--corner-width) - var(--border-width) / 2)
+        )
+        var(--border-width),
+      calc(100% - (var(--corner-size) * 7 - var(--border-width) / 2))
+        calc(var(--corner-height) + var(--border-width)),
+      0 calc(var(--corner-height) + var(--border-width)),
+      0 calc(100% - (var(--corner-height) + var(--border-width))),
+      var(--border-width)
+        calc(100% - (var(--corner-height) + var(--border-width))),
+      var(--border-width)
+        calc(100% - (var(--corner-height) + var(--border-width))),
+      var(--border-width) calc(var(--corner-height) + var(--border-width)),
+      0 calc(var(--corner-height) + var(--border-width))
+    );
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    z-index: -1;
+    width: 100%;
+    transform: scale(0);
+    transition: transform 0.3s linear;
+  }
+
+  span {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+
+      width: 0;
+      height: 0;
+      border-style: solid;
+
+      transition: border-color 0.15s linear;
+    }
+    &::before {
+      top: calc(var(--corner-height) + var(--border-width) + var(--triangle-indent));
+      left: calc(var(--border-width) + var(--triangle-indent));
+      border-width: var(--triangle-side) var(--triangle-side) 0 0;
+      border-color: var(--color) transparent transparent transparent;
+    }
+
+    &::after {
+      bottom: calc(var(--border-width) + var(--triangle-indent));
+      right: calc(var(--border-width) + var(--triangle-indent));
+      border-width: 0 0 var(--triangle-side) var(--triangle-side);
+      border-color: transparent transparent var(--color) transparent;
+    }
+  }
 
   &:hover {
-    background: rgb(var(--foreground-rgb));
-    color: rgb(var(--background-rgb))
+    --color: var(--color-background);
+    transition: color 0.3s linear;
+
+    &::after {
+      transform: scale(1);
+    }
+
+    span {
+      &::before,
+      &::after {
+        transition: border-color 0.3s linear 0.2s;
+      }
+    }
   }
 }
