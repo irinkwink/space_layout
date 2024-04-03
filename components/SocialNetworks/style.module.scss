@@ -1,0 +1,32 @@
+.socialNetworks {
+  display: flex;
+  gap: 2vw;
+
+  &Link {
+    display: inline-block;
+    text-indent: -1234rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+  }
+
+  &Discord {
+    background-image: url('./images/discord_icon.svg');
+  }
+
+  &Twitter {
+    background-image: url('./images/twitter_icon.svg');
+  }
+
+  &Medium {
+    background-image: url('./images/medium_icon.svg');
+  }
+}
