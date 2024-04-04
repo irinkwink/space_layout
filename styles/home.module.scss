@@ -1,7 +1,7 @@
 .section {
   height: 100vh;
-  padding: 3.5rem 5rem;
-  min-height: 40rem;
+  padding: var(--padding-top) var(--padding-left);
+  min-height: 50rem;
 
   &Main {
     background-image: url('/bg/screen_1_bg.jpg');
@@ -25,9 +25,9 @@
   gap: 3vw;
   align-items: center;
   position: absolute;
-  top: 3.5rem;
-  left: 5rem;
-  right: 5rem;
+  top: var(--padding-top);
+  left: var(--padding-left);
+  right: var(--padding-right);
   /* width: 100vw; */
   z-index: 2;
 }

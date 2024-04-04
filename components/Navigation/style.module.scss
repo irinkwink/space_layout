@@ -1,16 +1,46 @@
-.logo {
-  a {
-    display: inline-block;
-    text-indent: -1234rem;
-    background-image: url('./images/logo.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 15.6rem;
+.navigation {
+  --gap: 4vh;
+  font-family: 'NeueMachina', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  position: fixed;
+  left: var(--padding-left);
+  writing-mode: vertical-rl;
+
+  &List {
+    display: flex;
+    gap: var(--gap);
+
+  }
+
+  &Item {
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+    text-align: center;
+
+    &:not(:nth-child(3))::after {
+      margin-left: auto;
+      content: url('./images/star.svg');
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+  }
+
+  &Link {
+    opacity: 0.7;
     transition: opacity 0.3s;
 
+    &Active {
+      pointer-events: none;
+      opacity: 1;
+    }
+
     &:hover {
-      opacity: 0.7;
+      opacity: 1;
     }
   }
 }

@@ -19,7 +19,7 @@ export default function Home() {
             Whitepaper
           </Button>
         </header>
-        {/* <Navigation /> */}
+        <Navigation />
         <div className={styles.sectionHero}>
           <Title>
             From dusk to&nbsp;dawn
