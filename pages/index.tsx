@@ -38,6 +38,13 @@ export default function Home() {
           </ul>
         </div>
       </section>
+      <section className={classNames(styles.section, styles.sectionFactions)}>
+        <Title size="Large">
+          Factions
+        </Title>
+      </section>
+      <section className={classNames(styles.section, styles.sectionRoadmap)}>
+      </section>
     </div>
   );
 }
