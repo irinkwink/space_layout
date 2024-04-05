@@ -1,4 +1,5 @@
-import { Button } from "@/components/Button";
+import { ArtMenu } from "@/components/ArtMenu";
+import { ArtButton } from "@/components/ArtButton";
 import { Logo } from "@/components/Logo";
 import { Navigation } from "@/components/Navigation";
 import { SocialNetworks } from "@/components/SocialNetworks";
@@ -15,9 +16,9 @@ export default function Home() {
         >
           <Logo />
           <SocialNetworks />
-          <Button onClick={() => {}}>
+          <ArtButton onClick={() => {}}>
             Whitepaper
-          </Button>
+          </ArtButton>
         </header>
         <Navigation />
         <div className={styles.sectionHero}>
@@ -26,14 +27,14 @@ export default function Home() {
           </Title>
           <ul className={styles.buttonList}>
             <li>
-              <Button onClick={() => {}}>
+              <ArtButton onClick={() => {}}>
                 Mint
-              </Button>
+              </ArtButton>
             </li>
             <li>
-              <Button onClick={() => {}}>
+              <ArtButton onClick={() => {}}>
                 Connect Wallet
-              </Button>
+              </ArtButton>
             </li>
           </ul>
         </div>
@@ -42,6 +43,7 @@ export default function Home() {
         <Title size="Large">
           Factions
         </Title>
+        <ArtMenu />
       </section>
       <section className={classNames(styles.section, styles.sectionRoadmap)}>
       </section>

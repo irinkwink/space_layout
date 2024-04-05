@@ -1,6 +1,10 @@
-.button {
+.artButton {
   --color: var(--color-foreground);
   --bg: var(--color-foreground);
+  --color-1: linear-gradient(90deg, #FFB800 0%, #FFBAC3 70%);
+  --color-2: linear-gradient(70deg, #60B3FF 0%, #6BB3BD 100%);
+  --color-3: linear-gradient(70deg, #68E3D5 0%, #B24AC2 100%);
+  --color-4: linear-gradient(80deg, #8FF2F8 0%, #FFD84E 100%);
   --border-width: 2px;
   --corner-width: 0.8rem;
   --corner-height: 0.6rem;
@@ -10,7 +14,7 @@
 
   font-family: 'NeueMachina', sans-serif;
   font-size: 1.6rem;
-  width: 280px;
+  min-width: 136px;
   margin: 0 auto;
   padding: 2rem 3rem 1.4rem;
   position: relative;
@@ -20,6 +24,7 @@
   color: var(--color);
   transition: color 0.2s linear 0.1s;
 
+  /* full button polygon */
   clip-path: polygon(
     0 var(--corner-height),
     calc(100% - (var(--corner-size) * 7)) var(--corner-height),
@@ -42,9 +47,10 @@
     background: var(--bg);
     z-index: -2;
 
+    /* border button polygon */
     clip-path: polygon(
       0 var(--corner-height),
-      calc(100% - (var(--corner-size) * 7)) calc(var(--corner-height)),
+      calc(100% - (var(--corner-size) * 7)) var(--corner-height),
       calc(100% - (var(--corner-size) * 7 - var(--corner-width))) 0,
       100% 0,
       100% 100%,
@@ -93,7 +99,35 @@
     transition: transform 0.3s linear;
   }
 
-  span {
+  &Type1,
+  &Type2,
+  &Type3,
+  &Type4, {
+    --color: var(--color-background);
+    font-weight: 700;
+  }
+
+  &Type1::after {
+    background: var(--color-1);
+    transform: scale(1);
+  }
+
+  &Type2::after {
+    background: var(--color-2);
+    transform: scale(1);
+  }
+
+  &Type3::after {
+    background: var(--color-3);
+    transform: scale(1);
+  }
+
+  &Type4::after {
+    background: var(--color-4);
+    transform: scale(1);
+  }
+
+  &Standart span {
     &::before,
     &::after {
       content: "";
@@ -105,6 +139,7 @@
 
       transition: border-color 0.15s linear;
     }
+    
     &::before {
       top: calc(var(--corner-height) + var(--border-width) + var(--triangle-indent));
       left: calc(var(--border-width) + var(--triangle-indent));

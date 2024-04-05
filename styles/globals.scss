@@ -5,6 +5,13 @@
   --padding-top: 3.5rem;
   --padding-left: 5rem;
   --padding-right: 5rem;
+
+  --diamond-color: var(--color-foreground);
+  --diamond-color-active: linear-gradient(45deg, #2CD8D5 16%, #C5C1FF 50%, #FFBAC3 80%);
+  --diamond-border-horizontal: 6px;
+  --diamond-border-vertical: 9px;
+  --diamond-width: 32px;
+  --diamond-height: 46px;
 }
 
 *,

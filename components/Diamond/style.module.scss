@@ -1,0 +1,124 @@
+.diamond {
+  position: relative;
+  display: block;
+  height: auto;
+  line-height: 0;
+
+  &Item {
+    cursor: pointer;
+    width: var(--diamond-width);
+    height: var(--diamond-height);
+    position: relative;
+    isolation: isolate;
+    display: block;
+    transition: color 0.2s linear 0.1s;
+
+    /* full diamond polygon */
+    clip-path: polygon(50% 0, 100% 28%, 100% 72%, 50% 100%, 0 72%, 0 28%);
+
+    /* filter: drop-shadow(0px 10px 3px rgba(214, 192, 239, 1)); */
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--diamond-color);
+      opacity: 0.3;
+      z-index: -2;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: var(--diamond-border-vertical);
+      left: var(--diamond-border-horizontal);
+      right: var(--diamond-border-horizontal);
+      bottom: var(--diamond-border-vertical);
+      background: var(--diamond-color);
+      z-index: -1;
+
+      /* inside diamond polygon */
+      clip-path: polygon(50% 0, 100% 28%, 100% 72%, 50% 100%, 0 72%, 0 28%);
+
+      /* filter: drop-shadow(0px 20px 3px rgba(214, 192, 239, 1)); */
+    }
+
+    &Active::after {
+      background: var(--diamond-color-active);
+    }
+
+    &:hover::after {
+      background: var(--diamond-color-active);
+    }
+  }
+
+  &Side {
+    isolation: isolate;
+    position: absolute;
+    display: block;
+    top: calc(var(--diamond-border-vertical) * -1);
+    left: calc(var(--diamond-border-horizontal) * -1);
+    right: calc(var(--diamond-border-horizontal) * -1);
+    bottom: 0;
+
+    // ArtMenu line around Diamond
+    &::before {
+      z-index: -2;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: calc(var(--diamond-height) + (var( --diamond-border-vertical) * 2));
+      inset: 0;
+      background: var(--diamond-color);
+    }
+
+    &Right::before {
+      clip-path: polygon(
+        50% 0,
+        100% 28%,
+        100% 72%,
+        50% 100%,
+        
+        50% calc(100% - var( --diamond-border-vertical) ),
+        calc(100% - var( --diamond-border-horizontal)) calc(72% - 0.4rem),
+        calc(100% - var( --diamond-border-horizontal)) calc(28% + 0.4rem),
+        50% var( --diamond-border-vertical));
+    }
+
+    &Left::before {
+      clip-path: polygon(
+        50% var( --diamond-border-vertical) ,
+        var( --diamond-border-horizontal) calc(28% + 0.4rem),
+        var( --diamond-border-horizontal) calc(72% - 0.4rem),
+        50% calc(100% - var( --diamond-border-vertical) ),
+
+        50% 100%,
+        0% 72%,
+        0% 28%,
+        50% 0%);
+    }
+
+    // ArtMenu line
+    &::after {
+      content: "";
+      position: absolute;
+      top: calc(var(--diamond-height) + var( --diamond-border-vertical));
+      left: calc(50% - var(--diamond-border-horizontal));
+      height: calc(100% - (var(--diamond-height) + (var( --diamond-border-vertical))));
+      width: var( --diamond-border-horizontal);
+      background: var(--diamond-color);
+      z-index: -1;
+    }
+
+    &Right::after {
+      left: 50%;
+    }
+
+    &Right,
+    &Right + .diamondItem {
+      transform: translate(calc(var(--diamond-border-horizontal) * -1), 0);
+    }
+  }
+}

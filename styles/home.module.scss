@@ -19,7 +19,10 @@
 
   &Factions {
     background-image: url('/bg/screen_2_bg.jpg');
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 80px;
+    min-height: 74rem;
   }
 
   &Roadmap {

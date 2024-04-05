@@ -1,0 +1,76 @@
+.artMenu {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  /* &::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 46px;
+    width: 4px;
+    bottom: 46px;
+    background: white;
+    z-index: 0;
+  } */
+
+  &Item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: minmax(46px, auto) minmax(28px, 1fr);
+    grid-template-areas: 
+    "title diamond"
+    "card diamond";
+
+    justify-content: end;
+    line-height: 1;
+    gap: 0 27px;
+  }
+
+  &Title {
+    grid-area: title;
+    font-family: 'TTOctosquares', sans-serif;
+    font-weight: 500;
+    font-size: 2.2rem;
+    text-align: right;
+    line-height: 1;
+    align-self: center;
+  }
+
+  &Diamond {
+    grid-area: diamond;
+  }
+
+  &Card {
+    grid-area: card;
+    position: relative;
+    height: 0;
+    opacity: 0;
+    transition: all 0.3s;
+
+    &Button {
+      position: absolute;
+      left: -6.2rem;
+      top: 2.7rem;
+    }
+  
+    &Image {
+      display: block;
+    }
+  }
+
+
+  &ItemActive {
+    .artMenuTitle {
+      text-transform: uppercase;
+    }
+    
+    .artMenuCard {
+      opacity: 1;
+      height: 18.4rem;
+      width: 27.2rem;
+      overflow: visible;
+    }
+  }
+}

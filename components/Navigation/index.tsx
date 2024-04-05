@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 interface NavigationProps {}
 
-const navigationLinks = [
+const links = [
   {
     id: 1,
     title: 'Home',
@@ -47,19 +47,19 @@ export const Navigation: React.FC<NavigationProps> = ({}) => {
   return (
     <nav className={styles.navigation}>
       <ul className={styles.navigationList}>
-      {navigationLinks.map((navigationLink) => (
-        (navigationLink.id < 4) &&
+      {links.map((link) => (
+        (link.id < 4) &&
         <li 
-          key={navigationLink.id}
+          key={link.id}
           className={styles.navigationItem}
         >
           <Link 
             target="_blank"
-            href={navigationLink.href }
+            href={link.href }
             className={classNames(styles.navigationLink,
-              navigationLink.active && styles.navigationLinkActive)}
+              link.active && styles.navigationLinkActive)}
           >
-            {navigationLink.title}
+            {link.title}
           </Link>
         </li>
       ))}
