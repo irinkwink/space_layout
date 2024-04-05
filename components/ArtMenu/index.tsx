@@ -1,14 +1,11 @@
-import classNames from "classnames";
-import Link from "next/link"
+
 import styles from "./style.module.scss";
-import { Diamond } from "../Diamond";
-import { CardMore } from "../CardMore";
 import { useState } from "react";
 import { ArtMenuItem } from "./ArtMenuItem";
 
 interface ArtMenuProps {}
 
-const links = [
+const items = [
   {
       id: 1,
       href: '/',
@@ -40,15 +37,16 @@ export const ArtMenu: React.FC<ArtMenuProps> = ({}) => {
 
   return (
     <div className={styles.artMenu}>
-      {links.map((link) => (
+      {items.map((item) => (
         <ArtMenuItem
-          key={link.id}
+          key={item.id}
           onClick={(event) => {
             event.preventDefault();
-            setOpenedId(link.id !== openedId ? link.id : 0)
+            setOpenedId(item.id !== openedId ? item.id : 0)
           }}
-          isOpened={link.id === openedId}
-          {...link}
+          isLastChild={item.id === items.length}
+          isOpened={item.id === openedId}
+          {...item}
         />
       ))}
     </div>

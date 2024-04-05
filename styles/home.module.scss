@@ -13,7 +13,9 @@
   align-items: center;
   justify-content: center;
 
+
   &Main {
+    position: relative;
     background-image: url('/bg/screen_1_bg.jpg');
   }
 
@@ -26,8 +28,15 @@
   }
 
   &Roadmap {
+    min-height: 100vh;
+    height: auto;
     position: relative;
     background: linear-gradient(180deg, rgba(10,20,24,1) 0%, rgba(53,47,70,1) 100%);
+
+    justify-content: start;
+    align-items: start;
+    padding-left: 158px;
+    padding-top: 13.8rem;
 
     &::before {
       z-index: 0;
@@ -51,7 +60,6 @@
   top: var(--padding-top);
   left: var(--padding-left);
   right: var(--padding-right);
-  /* width: 100vw; */
   z-index: 2;
 }
 

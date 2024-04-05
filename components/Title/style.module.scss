@@ -7,6 +7,10 @@
   text-transform: uppercase;
   max-width: 86vw;
 
+  &Small {
+    font-size: 6.4rem;
+  }
+
   &Medium {
     font-size: 6.6rem;
     margin-bottom: 4rem;
@@ -14,5 +18,11 @@
 
   &Large {
     font-size: 8rem;
+  }
+
+  &Left {
+    text-align: left;
+    position: relative;
+    left: -6px;
   }
 }

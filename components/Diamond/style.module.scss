@@ -4,6 +4,11 @@
   height: auto;
   line-height: 0;
 
+  &Center {
+    /* top: 50%; */
+    transform: translate(0, 7rem);
+  }
+
   &Item {
     cursor: pointer;
     width: var(--diamond-width);
@@ -110,6 +115,11 @@
       width: var( --diamond-border-horizontal);
       background: var(--diamond-color);
       z-index: -1;
+    }
+
+    &Last::after {
+      content: "";
+      width: 0;
     }
 
     &Right::after {

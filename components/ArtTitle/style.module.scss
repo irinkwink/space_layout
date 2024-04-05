@@ -1,0 +1,23 @@
+.artTitle {
+  text-align: right;
+  font-family: 'MazzardH', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  z-index: 3;
+
+  &Text{
+    background-image: linear-gradient(90deg, #FFB800 0%, #FFBAC3 80%);
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    padding-right: 10px;
+
+  }
+
+  &Border {
+    display: block;
+    margin-bottom: 16px;
+  }
+}

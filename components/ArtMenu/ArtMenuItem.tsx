@@ -2,7 +2,6 @@ import classNames from "classnames";
 import Link from "next/link"
 import styles from "./style.module.scss";
 import { Diamond } from "../Diamond";
-import { CardMore } from "../CardMore";
 import { ArtButton } from "../ArtButton";
 import Image from "next/image";
 
@@ -11,6 +10,7 @@ interface ArtMenuItemProps {
   href: string;
   title: string;
   src: string;
+  isLastChild: boolean;
   isOpened: boolean;
   onClick: (event: React.MouseEvent) => void;
 }
@@ -20,6 +20,7 @@ export const ArtMenuItem: React.FC<ArtMenuItemProps> = ({
   href,
   title,
   src,
+  isLastChild,
   isOpened,
   onClick,
 }) => {
@@ -35,6 +36,7 @@ export const ArtMenuItem: React.FC<ArtMenuItemProps> = ({
       <h3 className={styles.artMenuTitle}>{title}</h3>
       <Diamond 
         active={isOpened}
+        isLastChild={isLastChild}
         side={ id % 2 === 0 ? 'Right' : 'Left'}
         className={styles.artMenuDiamond}
       />
