@@ -1,8 +1,6 @@
 import classNames from "classnames";
-import styles from "./style.module.scss";
 import { Diamond } from "../Diamond";
-import { Theme } from ".";
-
+import styles from "./style.module.scss";
 
 interface AnimatedMenuItemProps {
   index: number;
@@ -11,8 +9,7 @@ interface AnimatedMenuItemProps {
   title: string;
   text?: string;
   imageUrl: string;
-  theme: Theme;
-  currentTheme: Theme;
+  currentTheme: string;
   isActive: boolean;
   onClick: (event: React.MouseEvent) => void;
 }
@@ -31,26 +28,28 @@ export const AnimatedMenuItem: React.FC<AnimatedMenuItemProps> = ({
     <div
       key={id}
       onClick={onClick}
-      className={classNames(styles.animatedMenuItem,)}
+      className={classNames(styles.animatedMenuItem)}
     >
-      <Diamond 
+      <Diamond
         active={isActive}
         isLastChild={isLastChild}
-        type= 'Center'
-        side={ index % 2 === 0 ? 'Left' : 'Right'}
+        type="Center"
+        side={index % 2 === 0 ? "Left" : "Right"}
         className={styles.animationMenuDiamond}
       />
-      <div className={classNames(
+      <div
+        className={classNames(
           styles.animatedMenuCard,
           isActive && styles.animatedMenuCardActive,
-          styles[`animatedMenuCard${currentTheme}`]
-      )}>
+          styles[`animatedMenuCardTheme${currentTheme}`]
+        )}
+      >
         <div className={styles.animatedMenuCardContent}>
           <span className={styles.animatedMenuCardNumber}>{id}</span>
-            <h4 className={styles.animatedMenuCardTitle}>{title}</h4>
-            {text && (<p className={styles.animatedMenuCardText}>{text}</p>)}
+          <h4 className={styles.animatedMenuCardTitle}>{title}</h4>
+          {text && <p className={styles.animatedMenuCardText}>{text}</p>}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -7,6 +7,42 @@ $size-bottom-weight: 2rem;
 $size-bottom: 5.1rem;
 
 $size-border: 2px;
+$size-indent: 1px;
+
+$alpha: 0.7;
+
+$gradient: linear-gradient(
+  135deg,
+  rgba(255, 255, 255, 0) 0%,
+  rgba(255, 255, 255, 0.213) 100%
+);
+
+$colors: (
+  "theme01-1": #ff72e0,
+  "theme01-2": #f1a347,
+  "theme02-1": #60b3ff,
+  "theme02-2": #6bb3bd,
+  "theme03-1": #68e3d5,
+  "theme03-2": #b24ac2,
+  "theme04-1": #7affef,
+  "theme04-2": #58b9ff,
+  "theme05-1": #8ff2f8,
+  "theme05-2": #4effdf,
+  "bg-white": #fff,
+  "active-card-background": #fff,
+);
+
+@function HexToRGB($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+
+@function cl($name, $opacity: false) {
+  @if $opacity {
+    @return rgba(var(--color-#{unquote($name)}--rgb), $opacity);
+  } @else {
+    @return var(--color-#{unquote($name)});
+  }
+}
 
 .animatedMenu {
   position: relative;
@@ -16,51 +52,206 @@ $size-border: 2px;
   &Item {
     display: flex;
     gap: 4.5rem;
+
+    &:nth-child(5n + 1) .animatedMenuCard::before {
+      background-image: radial-gradient(
+          184px 120px at 80% 20%,
+          rgba(var(--color-first), $alpha) 0%,
+          transparent
+        ),
+        radial-gradient(
+          170px 130px at 70% 10%,
+          rgba(var(--color-second), $alpha) 0%,
+          transparent
+        ),
+        $gradient;
+    }
+
+    &:nth-child(5n + 2) .animatedMenuCard::before {
+      background-image: radial-gradient(
+          190px 130px at 45% 100%,
+          rgba(var(--color-first), $alpha) 0%,
+          transparent
+        ),
+        radial-gradient(
+          160px 120px at 30% 90%,
+          rgba(var(--color-second), $alpha) 0%,
+          transparent
+        ),
+        $gradient;
+    }
+
+    &:nth-child(5n + 3) .animatedMenuCard::before {
+      background-image: radial-gradient(
+          190px 130px at 65% 10%,
+          rgba(var(--color-first), $alpha) 0%,
+          transparent
+        ),
+        radial-gradient(
+          160px 120px at 50% 0%,
+          rgba(var(--color-second), $alpha) 0%,
+          transparent
+        ),
+        $gradient;
+    }
+
+    &:nth-child(5n + 4) .animatedMenuCard::before {
+      background-image: radial-gradient(
+          230px 130px at 50% 00%,
+          rgba(var(--color-first), $alpha) 0%,
+          transparent
+        ),
+        radial-gradient(
+          195px 130px at 65% 10%,
+          rgba(var(--color-second), $alpha) 0%,
+          transparent
+        ),
+        $gradient;
+    }
+
+    &:nth-child(5n + 5) .animatedMenuCard::before {
+      background-image: radial-gradient(
+          180px 150px at 45% 130%,
+          rgba(var(--color-first), $alpha) 0%,
+          transparent
+        ),
+        radial-gradient(
+          180px 130px at 30% 120%,
+          rgba(var(--color-second), $alpha) 0%,
+          transparent
+        ),
+        $gradient;
+    }
   }
 
   &Card {
+    @if $colors {
+      @each $key, $value in $colors {
+        --color-#{$key}: #{$value};
+        --color-#{$key}--rgb: #{HexToRGB($value)};
+      }
+    }
+
+    --color-first: var(--color-theme01-1--rgb);
+    --color-second: var(--color-theme01-2--rgb);
+
     position: relative;
     width: 35vw;
     padding: 4rem 3rem;
     margin-bottom: 50px;
     cursor: pointer;
     transition: transform 0.3s;
+    isolation: isolate;
 
-    &::after {
-      content: '';
+    &::before {
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
       display: block;
-      z-index: 0;
+      z-index: -2;
       transition: all 0.3s;
-      clip-path: polygon(
-          0 0,
-          $size-top 0,
-          calc($size-top + $size-top-weight) $size-top-height,
-          100% $size-top-height,
 
-          100% calc(100% - $size-bottom-height),
-          calc(100% - $size-bottom) calc(100% - $size-bottom-height),
-          calc(100% - $size-bottom - $size-bottom-weight) 100%,
-          0 100%,
+      /* card polygon */
+      clip-path: polygon(
+        0 0,
+        $size-top 0,
+        calc($size-top + $size-top-weight) $size-top-height,
+        100% $size-top-height,
+
+        100% calc(100% - $size-bottom-height),
+        calc(100% - $size-bottom) calc(100% - $size-bottom-height),
+        calc(100% - $size-bottom - $size-bottom-weight) 100%,
+        0 100%
       );
-      background: radial-gradient(
-          ellipse at center,
-          #4EFFDF 0%,
-          rgba(255,255,255,0) 100%
-      );
+
       backdrop-filter: blur(10px);
-      z-index: 1;
+      /* background-color: rgba(255, 255, 255, 0.05); */
+      background-repeat: no-repeat;
+
+      background-image: radial-gradient(
+          184px 120px at 80% 20%,
+          rgba(var(--color-first), $alpha) 0%,
+          rgba(255, 255, 255, 0) 100%
+        ),
+        radial-gradient(
+          160px 120px at 70% 10%,
+          rgba(var(--color-second), $alpha) 0%,
+          rgba(255, 255, 255, 0) 100%
+        ),
+        $gradient;
     }
 
-    &Pink::after {
-      background: radial-gradient(
-        ellipse at center,
-        rgba(255,114,224,0.4) 0%,
-        rgba(255,255,255,0) 100%
+    &Theme01::before {
+      --color-first: var(--color-theme01-1--rgb);
+      --color-second: var(--color-theme01-2--rgb);
+    }
+
+    &Theme02::before {
+      --color-first: var(--color-theme02-1--rgb);
+      --color-second: var(--color-theme02-2--rgb);
+    }
+
+    &Theme03::before {
+      --color-first: var(--color-theme03-1--rgb);
+      --color-second: var(--color-theme03-2--rgb);
+    }
+
+    &Theme04::before {
+      --color-first: var(--color-theme04-1--rgb);
+      --color-second: var(--color-theme04-2--rgb);
+    }
+
+    &Theme05::before {
+      --color-first: var(--color-theme05-1--rgb);
+      --color-second: var(--color-theme05-2--rgb);
+    }
+
+    //border
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+
+      background: linear-gradient(
+        35deg,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(255, 255, 255, 0.5) 100%
+      );
+
+      /* border card polygon */
+      clip-path: polygon(
+        0 0,
+        $size-top 0,
+        calc($size-top + $size-top-weight) $size-top-height,
+        100% $size-top-height,
+
+        100% calc(100% - $size-bottom-height),
+        calc(100% - $size-bottom) calc(100% - $size-bottom-height),
+        calc(100% - $size-bottom - $size-bottom-weight) 100%,
+        0 100%,
+
+        0 $size-border,
+        $size-border $size-border,
+
+        $size-border calc(100% - $size-border),
+        calc(100% - $size-bottom - $size-bottom-weight - $size-indent)
+          calc(100% - $size-border),
+        calc(100% - $size-bottom - $size-indent)
+          calc(100% - $size-bottom-height - $size-border),
+        calc(100% - $size-border)
+          calc(100% - $size-bottom-height - $size-border),
+        calc(100% - $size-border) calc($size-top-height + $size-border),
+        calc($size-top + $size-top-weight - $size-indent)
+          calc($size-top-height + $size-border),
+        calc($size-top - $size-indent) $size-border,
+        0 $size-border
       );
     }
 
@@ -71,18 +262,18 @@ $size-border: 2px;
 
     &Number {
       display: block;
-      font: bold 41px/1 'NeueMachina';
+      font: bold 41px/1 "NeueMachina";
       margin-bottom: 10px;
     }
 
     &Title {
-      font: bold 13px/1.4 'MazzardH';
+      font: bold 13px/1.4 "MazzardH";
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     &Text {
-      font: 13px/1.4 'MazzardH';
+      font: 13px/1.4 "MazzardH";
     }
 
     &Active {
@@ -90,27 +281,8 @@ $size-border: 2px;
       transform: scale(1.07);
       transform-origin: 0 0;
 
-      &::after {
-        background: linear-gradient(
-          45deg,
-          rgba(255,255,255,1) 0%,
-          rgba(255,255,255,1) 35%,
-          #58B9FF 71%,
-          #4BB7AA 89%
-        );
-      }
-
-      &:nth-child(1) {
-
-        &::after {
-          background: linear-gradient(
-            45deg,
-            rgba(255,255,255,1) 0%,
-            rgba(255,255,255,1) 35%,
-            rgba(241,163,71,1) 71%,
-            rgba(255,114,224,1) 89%
-          );
-        }
+      &:before {
+        background-color: cl(active-card-background);
       }
     }
 
@@ -124,7 +296,6 @@ $size-border: 2px;
     }
   }
 }
-
 
 .animatedImages {
   position: absolute;

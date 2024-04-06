@@ -1,60 +1,51 @@
 import classNames from "classnames";
+import { useState } from "react";
 import { AnimatedMenuItem } from "./AnimatedMenuItem";
 import styles from "./style.module.scss";
-import { useState } from "react";
-
-export type Theme = 'Pink' | 'Green' | 'Blue';
 
 interface Item {
   id: string;
   title: string;
   text?: string;
   imageUrl: string;
-  theme: Theme;
 }
 
 const items: Item[] = [
-    {
-        id: "01",
-        title: "Genesis lands drop",
-        text: "An original collection of 5,555 land plots will be made ready for the very first Dusktopian adventurers.",
-        imageUrl: "/animatedMenu/01.png",
-        theme: 'Pink',
-    },
-    {
-        id: "02",
-        title: "Staking goes live",
-        text: "The EON Corporation Superbank begins rewarding Dusktopians staking their land plots with $DAWN.",
-        imageUrl: "/animatedMenu/02.png",
-        theme: 'Green',
-    },
-    {
-        id: "03",
-        title: "New worlds emerge",
-        text: "Claim a slice of our secret land collection with $DAWN. Outfit your existing land with new properties and accessories.",
-        imageUrl: '/animatedMenu/03.png',
-        theme: 'Blue',
-    },
-    {
-        id: "04",
-        title: "Avatar collection drop",
-        text: "Get the PFP avatars you will use for in-universe interaction, synergized with your asset holdings.",
-        imageUrl: '/animatedMenu/04.png',
-        theme: 'Green',
-
-    },
-    {
-        id: "05",
-        title: "Let's the game begin",
-        imageUrl: '/animatedMenu/05.png',
-        theme: 'Blue',
-    }
+  {
+    id: "01",
+    title: "Genesis lands drop",
+    text: "An original collection of 5,555 land plots will be made ready for the very first Dusktopian adventurers.",
+    imageUrl: "/animatedMenu/01.png",
+  },
+  {
+    id: "02",
+    title: "Staking goes live",
+    text: "The EON Corporation Superbank begins rewarding Dusktopians staking their land plots with $DAWN.",
+    imageUrl: "/animatedMenu/02.png",
+  },
+  {
+    id: "03",
+    title: "New worlds emerge",
+    text: "Claim a slice of our secret land collection with $DAWN. Outfit your existing land with new properties and accessories.",
+    imageUrl: "/animatedMenu/03.png",
+  },
+  {
+    id: "04",
+    title: "Avatar collection drop",
+    text: "Get the PFP avatars you will use for in-universe interaction, synergized with your asset holdings.",
+    imageUrl: "/animatedMenu/04.png",
+  },
+  {
+    id: "05",
+    title: "Let's the game begin",
+    imageUrl: "/animatedMenu/05.png",
+  },
 ];
 
 interface AnimatedMenuProps {}
 
 export const AnimatedMenu: React.FC<AnimatedMenuProps> = ({}) => {
-  const [activeItem, setActiveItem ] = useState(0);
+  const [activeItem, setActiveItem] = useState(0);
 
   return (
     <div>
@@ -63,9 +54,11 @@ export const AnimatedMenu: React.FC<AnimatedMenuProps> = ({}) => {
           <AnimatedMenuItem
             key={item.id}
             index={index}
-            isLastChild={index === (items.length - 1)}
-            currentTheme={items[activeItem].theme}
-            onClick={() => {setActiveItem(index)}}
+            isLastChild={index === items.length - 1}
+            currentTheme={items[activeItem].id}
+            onClick={() => {
+              setActiveItem(index);
+            }}
             isActive={index === activeItem}
             {...item}
           />
@@ -76,7 +69,7 @@ export const AnimatedMenu: React.FC<AnimatedMenuProps> = ({}) => {
           <div
             key={item.id}
             style={{
-                backgroundImage: `url('${item.imageUrl}')`
+              backgroundImage: `url('${item.imageUrl}')`,
             }}
             className={classNames(
               styles.animatedImagesItem,
@@ -86,5 +79,5 @@ export const AnimatedMenu: React.FC<AnimatedMenuProps> = ({}) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
