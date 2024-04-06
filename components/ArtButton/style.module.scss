@@ -7,22 +7,20 @@ $size-bottom-weight: 0.8rem;
 $size-bottom: 2.1rem;
 
 $size-border: 2px;
+$size-indent: 0.1rem;
+
+$triangle-side: 1rem;
+$triangle-indent: 0.3rem;
 
 .artButton {
   --color: var(--color-foreground);
   --bg: var(--color-foreground);
-  --color-1: linear-gradient(90deg, #FFB800 0%, #FFBAC3 70%);
-  --color-2: linear-gradient(70deg, #60B3FF 0%, #6BB3BD 100%);
-  --color-3: linear-gradient(70deg, #68E3D5 0%, #B24AC2 100%);
-  --color-4: linear-gradient(80deg, #8FF2F8 0%, #FFD84E 100%);
-  --border-width: 2px;
-  --corner-width: 0.8rem;
-  --corner-height: 0.6rem;
-  --corner-size: 0.6rem;
-  --triangle-side: 1rem;
-  --triangle-indent: 4px;
+  --color-1: linear-gradient(90deg, #ffb800 0%, #ffbac3 70%);
+  --color-2: linear-gradient(70deg, #60b3ff 0%, #6bb3bd 100%);
+  --color-3: linear-gradient(70deg, #68e3d5 0%, #b24ac2 100%);
+  --color-4: linear-gradient(80deg, #8ff2f8 0%, #ffd84e 100%);
 
-  font-family: 'NeueMachina', sans-serif;
+  font-family: "NeueMachina", sans-serif;
   font-size: 1.6rem;
   min-width: 136px;
   margin: 0 auto;
@@ -36,15 +34,15 @@ $size-border: 2px;
 
   /* full button polygon */
   clip-path: polygon(
-    0 var(--corner-height),
-    calc(100% - (var(--corner-size) * 7)) var(--corner-height),
-    calc(100% - (var(--corner-size) * 7 - var(--corner-width))) 0,
+    0 $size-top-height,
+    calc(100% - $size-top - $size-top-weight) $size-top-height,
+    calc(100% - $size-top) 0,
     100% 0,
+
     100% 100%,
-    calc(var(--corner-size) * 5) 100%,
-    calc(var(--corner-size) * 5 - var(--corner-width))
-      calc(100% - var(--corner-height)),
-    0 calc(100% - var(--corner-height))
+    calc($size-bottom + $size-bottom-weight) 100%,
+    $size-bottom calc(100% - $size-bottom-height),
+    0 calc(100% - $size-bottom-height)
   );
 
   &::before {
@@ -56,43 +54,9 @@ $size-border: 2px;
     bottom: 0;
     background: var(--bg);
     z-index: -2;
-
-    /* border button polygon */
-    clip-path: polygon(
-      0 var(--corner-height),
-      calc(100% - (var(--corner-size) * 7)) var(--corner-height),
-      calc(100% - (var(--corner-size) * 7 - var(--corner-width))) 0,
-      100% 0,
-      100% 100%,
-      calc(var(--corner-size) * 5) 100%,
-      calc(var(--corner-size) * 5 - var(--corner-width))
-        calc(100% - var(--corner-height)),
-      0 calc(100% - var(--corner-height)),
-      0 calc(100% - (var(--corner-height) + var(--border-width))),
-      calc(var(--corner-size) * 3)
-        calc(100% - (var(--corner-height) + var(--border-width))),
-      calc(var(--corner-size) * 5 - var(--corner-width) + var(--border-width) / 2)
-        calc(100% - (var(--corner-height) + var(--border-width))),
-      calc(var(--corner-size) * 5 + var(--border-width) / 2)
-        calc(100% - var(--border-width)),
-      calc(100% - var(--border-width)) calc(100% - var(--border-width)),
-      calc(100% - var(--border-width)) var(--border-width),
-      calc(
-          100% -
-            (var(--corner-size) * 7 - var(--corner-width) - var(--border-width) / 2)
-        )
-        var(--border-width),
-      calc(100% - (var(--corner-size) * 7 - var(--border-width) / 2))
-        calc(var(--corner-height) + var(--border-width)),
-      0 calc(var(--corner-height) + var(--border-width)),
-      0 calc(100% - (var(--corner-height) + var(--border-width))),
-      var(--border-width)
-        calc(100% - (var(--corner-height) + var(--border-width))),
-      var(--border-width)
-        calc(100% - (var(--corner-height) + var(--border-width))),
-      var(--border-width) calc(var(--corner-height) + var(--border-width)),
-      0 calc(var(--corner-height) + var(--border-width))
-    );
+    width: 100%;
+    transform: scale(0);
+    transition: transform 0.3s linear;
   }
 
   &::after {
@@ -104,35 +68,81 @@ $size-border: 2px;
     bottom: 0;
     background: var(--bg);
     z-index: -1;
-    width: 100%;
-    transform: scale(0);
-    transition: transform 0.3s linear;
+
+    /* border button polygon */
+    clip-path: polygon(
+      0 $size-top-height,
+      calc(100% - $size-top - $size-top-weight) $size-top-height,
+      calc(100% - $size-top) 0,
+      100% 0,
+
+      100% 100%,
+      calc($size-bottom + $size-bottom-weight) 100%,
+      $size-bottom calc(100% - $size-bottom-height),
+      0 calc(100% - $size-bottom-height),
+      0 calc($size-top-height + $size-border),
+      $size-border calc($size-top-height + $size-border),
+      $size-border calc(100% - $size-bottom-height - $size-border),
+      calc($size-bottom + $size-indent)
+        calc(100% - $size-bottom-height - $size-border),
+      calc($size-bottom + $size-bottom-weight + $size-indent)
+        calc(100% - $size-border),
+      calc(100% - $size-border) calc(100% - $size-border),
+      calc(100% - $size-border) $size-border,
+      calc(100% - $size-top + $size-indent) $size-border,
+      calc(100% - $size-top - $size-top-weight + $size-indent)
+        calc($size-top-height + $size-border),
+      0 calc($size-top-height + $size-border),
+      /* $size-border calc($size-top-height + $size-border) */
+    );
   }
 
   &Type1,
   &Type2,
   &Type3,
-  &Type4, {
+  &Type4 {
     --color: var(--color-background);
     font-weight: 700;
+    transition: all 0.3s ease-in-out;
+
+    &::after {
+      background: linear-gradient(
+        27deg,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(255, 255, 255, 0.2) 100%
+      );
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      /* font-size: 1.8rem; */
+
+      &::after {
+        background: linear-gradient(
+          27deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 0.5) 100%
+        );
+      }
+    }
   }
 
-  &Type1::after {
+  &Type1::before {
     background: var(--color-1);
     transform: scale(1);
   }
 
-  &Type2::after {
+  &Type2::before {
     background: var(--color-2);
     transform: scale(1);
   }
 
-  &Type3::after {
+  &Type3::before {
     background: var(--color-3);
     transform: scale(1);
   }
 
-  &Type4::after {
+  &Type4::before {
     background: var(--color-4);
     transform: scale(1);
   }
@@ -149,27 +159,27 @@ $size-border: 2px;
 
       transition: border-color 0.15s linear;
     }
-    
+
     &::before {
-      top: calc(var(--corner-height) + var(--border-width) + var(--triangle-indent));
-      left: calc(var(--border-width) + var(--triangle-indent));
-      border-width: var(--triangle-side) var(--triangle-side) 0 0;
+      top: calc($size-top-height + $size-border + $triangle-indent);
+      left: calc($size-border + $triangle-indent);
+      border-width: $triangle-side $triangle-side 0 0;
       border-color: var(--color) transparent transparent transparent;
     }
 
     &::after {
-      bottom: calc(var(--border-width) + var(--triangle-indent));
-      right: calc(var(--border-width) + var(--triangle-indent));
-      border-width: 0 0 var(--triangle-side) var(--triangle-side);
+      bottom: calc($size-border + $triangle-indent);
+      right: calc($size-border + $triangle-indent);
+      border-width: 0 0 $triangle-side $triangle-side;
       border-color: transparent transparent var(--color) transparent;
     }
   }
 
-  &:hover {
+  &Standart:hover {
     --color: var(--color-background);
     transition: color 0.3s linear;
 
-    &::after {
+    &::before {
       transform: scale(1);
     }
 
